@@ -20,6 +20,10 @@ img {
   height: auto;
 }
 
+.spacer {
+  height: 200vh;
+}
+
 .custom-section {
   min-height: 100dvh;
   display: flex;
