@@ -3,18 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Image+text</title>
   </head>
   <body>
-    <section>
-      <picture>
+    <section class="custom-section">
+      <picture class="custom-section__picture">
         <source media="(max-width: 375px)" srcset="assets/model_s.png" />
         <source media="(min-width: 376px)" srcset="assets/model_l.png" />
         <img src="assets/model_l.png" alt="Model in a dress with a bag." />
       </picture>
-      <article>
-        <h1>Handcrafted and Responsibly Sourced</h1>
-        <p>
+      <article class="custom-section__article">
+        <h1 class="custom-section__title">
+          Handcrafted and Responsibly Sourced
+        </h1>
+        <p class="custom-section__text">
           On the other hand, we denounce with righteous indignation and dislike
           men who are so beguiled and demoralized by the charms of pleasure of
           the moment, so blinded by desire, that they cannot foresee the pain
@@ -22,7 +31,7 @@
           who fail in their duty through weakness of will, which is the same as
           saying through shrinking from toil and pain.
         </p>
-        <button>Learn more</button>
+        <button class="custom-section__button">Learn more</button>
       </article>
     </section>
   </body>
