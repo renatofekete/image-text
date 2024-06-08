@@ -12,17 +12,13 @@ class ShowOnScroll extends HTMLElement {
 
     const slot = document.createElement('slot')
 
-    const style = document.createElement('style')
+    const stylesheetLink = document.createElement('link')
 
-    style.innerText = `
-      .intersection {
-        visibility: visible;
-      }
-      .intersection--hidden {
-        visibility: hidden;
-      }
-    `
-    shadow.appendChild(style)
+    stylesheetLink.href = 'style.css'
+
+    stylesheetLink.rel = 'stylesheet'
+
+    shadow.appendChild(stylesheetLink)
     container.appendChild(slot)
     shadow.appendChild(container)
 
@@ -37,11 +33,11 @@ class ShowOnScroll extends HTMLElement {
       if (entry.isIntersecting) {
         this.shadowRoot
           .querySelector('.intersection')
-          .classList.remove('intersection--hidden')
+          .classList.add('intersection--visible')
       } else {
         this.shadowRoot
           .querySelector('.intersection')
-          .classList.add('intersection--hidden')
+          .classList.remove('intersection--visible')
       }
     })
   }

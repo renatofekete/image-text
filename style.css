@@ -24,6 +24,15 @@ img {
   height: 200vh;
 }
 
+.intersection {
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.intersection--visible {
+  opacity: 1;
+}
+
 .custom-section {
   min-height: 100dvh;
   display: flex;
