@@ -2,6 +2,7 @@ class ShowOnScroll extends HTMLElement {
   constructor() {
     super()
     this.handleIntersection = this.handleIntersection.bind(this)
+    this.observer = null
   }
 
   connectedCallback() {
@@ -23,10 +24,10 @@ class ShowOnScroll extends HTMLElement {
     container.appendChild(slot)
     shadow.appendChild(container)
 
-    const observer = new IntersectionObserver(this.handleIntersection, {
+    this.observer = new IntersectionObserver(this.handleIntersection, {
       threshold: 0.1,
     })
-    observer.observe(this)
+    this.observer.observe(this)
   }
 
   handleIntersection(entries) {
@@ -42,11 +43,50 @@ class ShowOnScroll extends HTMLElement {
       }
     })
   }
+
+  disconnectedCallback() {
+    this.observer.disconnect()
+  }
 }
 
 class CustomSection extends HTMLElement {
   constructor() {
     super()
+    this.button = null
+    this.activeElements = null
+    this.hiddenText = null
+    this.handleClick = this.handleClick.bind(this)
+    this.handleAnimationEnd = this.handleAnimationEnd.bind(this)
+    this.handleSlotChange = this.handleSlotChange.bind(this)
+  }
+
+  handleClick() {
+    this.button.classList.add('hide')
+    this.activeElements.forEach((element) => {
+      element.classList.add('hide')
+    })
+  }
+
+  handleAnimationEnd() {
+    this.hiddenText.classList.remove('hidden')
+    this.hiddenText.classList.add('reveal')
+  }
+
+  handleSlotChange() {
+    const button = this.querySelector('.custom-section__button')
+    if (!button) {
+      throw new Error('Button not found')
+    }
+
+    this.button = button
+    const activeElements = this.querySelectorAll('.active')
+    this.activeElements = activeElements
+    const hiddenText = this.querySelector('.custom-section__text.hidden')
+    this.hiddenText = hiddenText
+
+    this.button.addEventListener('click', this.handleClick)
+
+    this.button.addEventListener('animationend', this.handleAnimationEnd)
   }
 
   connectedCallback() {
@@ -68,27 +108,13 @@ class CustomSection extends HTMLElement {
     container.appendChild(slot)
     shadow.appendChild(container)
 
-    shadow.addEventListener('slotchange', () => {
-      try {
-        const button = this.querySelector('.custom-section__button')
-        const activeElements = this.querySelectorAll('.active')
-        const hiddenText = this.querySelector('.custom-section__text.hidden')
+    shadow.addEventListener('slotchange', this.handleSlotChange)
+  }
 
-        button.addEventListener('click', () => {
-          button.classList.add('hide')
-          activeElements.forEach((element) => {
-            element.classList.add('hide')
-          })
-        })
-
-        button.addEventListener('animationend', () => {
-          hiddenText.classList.remove('hidden')
-          hiddenText.classList.add('reveal')
-        })
-      } catch (error) {
-        console.error(error)
-      }
-    })
+  disconnectedCallback() {
+    this.button.removeEventListener('click', this.handleClick)
+    this.button.removeEventListener('animationend', this.handleAnimationEnd)
+    this.shadowRoot.removeEventListener('slotchange', this.handleSlotChange)
   }
 }
 
