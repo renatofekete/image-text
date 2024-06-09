@@ -52,6 +52,7 @@ img {
   display: flex;
   margin: 0 1rem;
   justify-content: center;
+  overflow: hidden;
 }
 
 .custom-section__title {
@@ -63,6 +64,15 @@ img {
 
 .custom-section__text {
   margin-bottom: 1.5rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.reveal {
+  animation-delay: 1s;
+  animation: reveal 1s forwards;
 }
 
 .custom-section__button {
@@ -107,5 +117,14 @@ img {
   .custom-section__button {
     font-size: 0.875rem;
     padding: 1.063rem 3.063rem;
+  }
+}
+
+@keyframes reveal {
+  0% {
+    transform: translate(0, 200%);
+  }
+  100% {
+    transform: translate(0, 0);
   }
 }

@@ -15,7 +15,7 @@
   <body>
     <div class="spacer"></div>
     <show-on-scroll>
-      <section class="custom-section">
+      <custom-section>
         <picture class="custom-section__picture">
           <source media="(max-width: 375px)" srcset="assets/model_s.png" />
           <source media="(min-width: 376px)" srcset="assets/model_l.png" />
@@ -23,10 +23,10 @@
         </picture>
         <article class="custom-section__article">
           <div class="custom-section__content">
-            <h1 class="custom-section__title">
+            <h1 class="custom-section__title active">
               Handcrafted and Responsibly Sourced
             </h1>
-            <p class="custom-section__text">
+            <p class="custom-section__text active">
               On the other hand, we denounce with righteous indignation and
               dislike men who are so beguiled and demoralized by the charms of
               pleasure of the moment, so blinded by desire, that they cannot
@@ -35,10 +35,19 @@
               will, which is the same as saying through shrinking from toil and
               pain.
             </p>
+            <p class="custom-section__text hidden">
+              Learn more text... On the other hand, we denounce with righteous
+              indignation and dislike men who are so beguiled and demoralized by
+              the charms of pleasure of the moment, so blinded by desire, that
+              they cannot foresee the pain and trouble that are bound to ensue;
+              and equal blame belongs to those who fail in their duty through
+              weakness of will, which is the same as saying through shrinking
+              from toil and pain.
+            </p>
             <button class="custom-section__button">Learn more</button>
           </div>
         </article>
-      </section>
+      </custom-section>
     </show-on-scroll>
     <div class="spacer"></div>
     <script src="app.js"></script>

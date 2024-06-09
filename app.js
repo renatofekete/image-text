@@ -8,6 +8,7 @@ class ShowOnScroll extends HTMLElement {
     const shadow = this.attachShadow({ mode: 'open' })
 
     const container = document.createElement('div')
+
     container.classList.add('intersection')
 
     const slot = document.createElement('slot')
@@ -43,4 +44,51 @@ class ShowOnScroll extends HTMLElement {
   }
 }
 
+class CustomSection extends HTMLElement {
+  constructor() {
+    super()
+  }
+
+  connectedCallback() {
+    const shadow = this.attachShadow({ mode: 'open' })
+
+    const container = document.createElement('div')
+
+    container.classList.add('custom-section')
+
+    const slot = document.createElement('slot')
+
+    const stylesheetLink = document.createElement('link')
+
+    stylesheetLink.href = 'style.css'
+
+    stylesheetLink.rel = 'stylesheet'
+
+    shadow.appendChild(stylesheetLink)
+    container.appendChild(slot)
+    shadow.appendChild(container)
+
+    shadow.addEventListener('slotchange', () => {
+      try {
+        const button = this.querySelector('.custom-section__button')
+        const activeElements = this.querySelectorAll('.active')
+        const hiddenText = this.querySelector('.custom-section__text.hidden')
+
+        button.addEventListener('click', () => {
+          button.classList.add('hidden')
+          activeElements.forEach((element) => {
+            element.classList.add('hidden')
+          })
+
+          hiddenText.classList.remove('hidden')
+          hiddenText.classList.add('reveal')
+        })
+      } catch (error) {
+        console.error(error)
+      }
+    })
+  }
+}
+
 customElements.define('show-on-scroll', ShowOnScroll)
+customElements.define('custom-section', CustomSection)
