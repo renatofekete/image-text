@@ -75,11 +75,13 @@ class CustomSection extends HTMLElement {
         const hiddenText = this.querySelector('.custom-section__text.hidden')
 
         button.addEventListener('click', () => {
-          button.classList.add('hidden')
+          button.classList.add('hide')
           activeElements.forEach((element) => {
-            element.classList.add('hidden')
+            element.classList.add('hide')
           })
+        })
 
+        button.addEventListener('animationend', () => {
           hiddenText.classList.remove('hidden')
           hiddenText.classList.add('reveal')
         })

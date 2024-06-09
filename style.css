@@ -52,6 +52,7 @@ img {
   display: flex;
   margin: 0 1rem;
   justify-content: center;
+  position: relative;
   overflow: hidden;
 }
 
@@ -71,8 +72,12 @@ img {
 }
 
 .reveal {
-  animation-delay: 1s;
+  transform: translate(0, 300%);
   animation: reveal 1s forwards;
+}
+
+.hide {
+  animation: hide 1s forwards;
 }
 
 .custom-section__button {
@@ -126,5 +131,15 @@ img {
   }
   100% {
     transform: translate(0, 0);
+  }
+}
+
+@keyframes hide {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
   }
 }
